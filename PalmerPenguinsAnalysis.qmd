@@ -11,7 +11,7 @@ execute:
 
 This is an analysis of the Palmer's Penguin data set.
 
-## Loading Packages and Datasets
+## Loading Packages and Data sets
 
 Here we will load the tidyverse packages and penguins data.
 
@@ -155,6 +155,8 @@ penguins %>%
 
 -   correlation between bill length and bill depth
 
+This plot is used to show the distribution of Flipper Length between penguins.
+
 ```{r}
 penguins %>%
   ggplot() +
@@ -185,4 +187,11 @@ penguins %>%
   ggplot() + 
   geom_point(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_smooth(aes(x = bill_length_mm, y = bill_depth_mm, color = species), method = "lm")
+```
+
+```{r}
+penguins %>%
+  summarize(avg_bill_length = mean(bill_length_mm))
+
+t.test(penguins$bill_length_mm, alternative = "greater", mu = 45, corf.level = 0.95)
 ```

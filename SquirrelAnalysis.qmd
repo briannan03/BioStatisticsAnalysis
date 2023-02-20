@@ -1,0 +1,186 @@
+---
+title: "Squirrel analysis"
+author: Brianna Nason
+format: html
+editor: visual
+execute: 
+  keep-md: true
+---
+
+## Squirrel Analysis
+
+Exploratory analysis of NYC squirrel data set.
+
+## Loading Packages and Data Set
+
+```{r}
+#Load the tidyverse
+library(tidyverse)
+library(kableExtra)
+
+#Read the squirrel data file from github
+nyc_squirrels <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-29/nyc_squirrels.csv")
+
+#install.packages("tidymodels")
+library(tidymodels)
+
+my_data_splits <- initial_split(nyc_squirrels, prop = 0.5)
+
+exploratory_data <- training(my_data_splits)
+test_data <- testing(my_data_splits)
+```
+
+```{r}
+#See the first six rows of the data we've read in to our notebook
+exploratory_data %>%
+  head(2) %>%
+  kable() %>%
+  kable_styling(c("striped", "hover"))
+```
+
+## Questions
+
+-   Does fur color effect its behavior?
+
+-   Does location effect a squirrels behavior?
+
+## Hypotheses
+
+-   I predict that fur color effects a squirrels behavior because their fur colors help them camouflage themselves in their environment.
+
+-   I predict that location effects a squirrels behavior because squirrels located in busier parts of the city behave differently than squirrels that aren't.
+
+# Data Visualization
+
+This plot was used to find the relationship between the behavior of running and the fur color of different squirrels found in NYC.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=running))+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the behavior of running and the fur color of different squirrels found in NYC. This plot is different than the one above because it is filled in to better interpret the plot.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=running),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the behavior of chasing and the fur color of different squirrels found in NYC.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=chasing),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the behavior of climbing and the fur color of different squirrels found in NYC.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=climbing),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the behavior of eating and the fur color of different squirrels found in NYC.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=eating),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the behavior of foraging and the fur color of different squirrels found NYC.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=foraging),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the other behaviors that squirrels found in NYC were seen doing.
+
+```{r}
+exploratory_data %>%
+  count(other_activities) %>%
+  arrange(-n)
+exploratory_data %>%
+  ggplot()+
+  geom_bar(aes(x=combination_of_primary_and_highlight_color,
+               fill=other_activities),
+           position="fill")+
+  coord_flip()
+```
+
+This plot was used to show the relationship between the location where a squirrel was found in NYC and the behavior of running.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_point(aes(x=long,
+                 y=lat,
+                 color=running))
+```
+
+This plot was used to show the relationship between the location where a squirrel was found in NYC and the behavior of chasing.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_point(aes(x=long,
+                 y=lat,
+                 color=chasing))
+```
+
+This plot was used to show the relationship between the location where squirrels was found in NYC and the behavior of climbing.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_point(aes(x=long,
+                 y=lat,
+                 color=climbing))
+```
+
+This plot was used to show the relationship between the location where squirrels was found in NYC and the behavior of eating.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_point(aes(x=long,
+                 y=lat,
+                 color=eating))
+```
+
+This plot was used to show the relationship between the location where squirrels was found in NYC and the behavior of foraging.
+
+```{r}
+exploratory_data %>%
+  ggplot()+
+  geom_point(aes(x=long,
+                 y=lat,
+                 color=foraging))
+```
+
+## Abstract
+
+The questions that were asked was does fur color effect a squirrels behavior and does location effect a squirrels behavior?

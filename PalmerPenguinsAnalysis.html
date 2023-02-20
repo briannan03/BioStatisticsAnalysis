@@ -137,8 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="palmer-penguin-initial-analysis">Palmer Penguin Initial Analysis</h2>
 <p>This is an analysis of the Palmer’s Penguin data set.</p>
 </section>
-<section id="loading-packages-and-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="loading-packages-and-datasets">Loading Packages and Datasets</h2>
+<section id="loading-packages-and-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="loading-packages-and-data-sets">Loading Packages and Data sets</h2>
 <p>Here we will load the tidyverse packages and penguins data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load the tidyverse</span></span>
@@ -432,6 +432,7 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 <li><p>Bill length by year</p></li>
 <li><p>correlation between bill length and bill depth</p></li>
 </ul>
+<p>This plot is used to show the distribution of Flipper Length between penguins.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -480,6 +481,30 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 </div>
 <div class="cell-output-display">
 <p><img src="PalmerPenguinsAnalysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_bill_length =</span> <span class="fu">mean</span>(bill_length_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_bill_length
+            &lt;dbl&gt;
+1            46.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(penguins<span class="sc">$</span>bill_length_mm, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">mu =</span> <span class="dv">45</span>, <span class="at">corf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  penguins$bill_length_mm
+t = 1.8438, df = 43, p-value = 0.03606
+alternative hypothesis: true mean is greater than 45
+95 percent confidence interval:
+ 45.12094      Inf
+sample estimates:
+mean of x 
+ 46.37045 </code></pre>
 </div>
 </div>
 </section>

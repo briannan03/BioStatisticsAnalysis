@@ -13,7 +13,7 @@ execute:
 
 This is an analysis of the Palmer's Penguin data set.
 
-## Loading Packages and Datasets
+## Loading Packages and Data sets
 
 Here we will load the tidyverse packages and penguins data.
 
@@ -447,6 +447,8 @@ penguins %>%
 
 -   correlation between bill length and bill depth
 
+This plot is used to show the distribution of Flipper Length between penguins.
+
 
 ::: {.cell}
 
@@ -528,5 +530,42 @@ Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
 
 ::: {.cell-output-display}
 ![](PalmerPenguinsAnalysis_files/figure-html/unnamed-chunk-11-1.png){width=672}
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+penguins %>%
+  summarize(avg_bill_length = mean(bill_length_mm))
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+# A tibble: 1 × 1
+  avg_bill_length
+            <dbl>
+1            46.4
+```
+:::
+
+```{.r .cell-code}
+t.test(penguins$bill_length_mm, alternative = "greater", mu = 45, corf.level = 0.95)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+
+	One Sample t-test
+
+data:  penguins$bill_length_mm
+t = 1.8438, df = 43, p-value = 0.03606
+alternative hypothesis: true mean is greater than 45
+95 percent confidence interval:
+ 45.12094      Inf
+sample estimates:
+mean of x 
+ 46.37045 
+```
 :::
 :::
